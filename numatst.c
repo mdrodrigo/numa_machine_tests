@@ -21,6 +21,11 @@ int main(){
 
 	int *new_ptr = numa_alloc_onnode(sizeof(int),1);
 	*new_ptr=404;
+	/* is necessary to put a single value in the allocate space by this reason:
+	   "All numa memory allocation policy only takes effect when a page is
+            actually faulted into the address space of a process by accessing it.
+            The numa_alloc_* functions take care of this automatically."
+	*/
 	ptr_to_check = new_ptr;
 	printf("VA: %p --- PA: %p\n",new_ptr,ptr_to_check);
 	status[0]=-1;
